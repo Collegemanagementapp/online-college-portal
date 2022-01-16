@@ -81,8 +81,8 @@ def doLogin(request):
                 return redirect('admin_home')
                 
             elif user_type == '2':
-                return HttpResponse("Teacher Login"+str(user.user_type))
-                # return redirect('teacher_home')
+                # return HttpResponse("Teacher Login"+str(user.user_type))
+                return redirect('staff_home')
                 
             elif user_type == '3':
                 # return HttpResponse("Student Login")
