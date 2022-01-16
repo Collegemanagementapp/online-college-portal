@@ -87,23 +87,30 @@ class Students(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
 
-
-class Attendance(models.Model):
-    # Subject Attendance
-    id = models.AutoField(primary_key=True)
-    subject_id = models.ForeignKey(Subjects, on_delete=models.DO_NOTHING)
-    attendance_date = models.DateField()
-    session_year_id = models.ForeignKey(SessionYearModel, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    objects = models.Manager()
-
-
 class AttendanceReport(models.Model):
     # Individual Student Attendance
     id = models.AutoField(primary_key=True)
     student_id = models.ForeignKey(Students, on_delete=models.DO_NOTHING)
-    attendance_id = models.ForeignKey(Attendance, on_delete=models.CASCADE)
+    # attendance_id = models.ForeignKey(Attendance, on_delete=models.CASCADE)
+    # attendance_date = models.DateField()
+    status = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+
+class Attendance(models.Model):
+    # Subject Attendance
+    # id = models.AutoField(primary_key=True)
+    # subject_id = models.ForeignKey(Subjects, on_delete=models.DO_NOTHING)
+    # attendance_date = models.DateField()
+    # session_year_id = models.ForeignKey(SessionYearModel, on_delete=models.CASCADE)
+    # created_at = models.DateTimeField(auto_now_add=True)
+    # updated_at = models.DateTimeField(auto_now=True)
+    # objects = models.Manager()
+    id = models.AutoField(primary_key=True)
+    teacher_id = models.ForeignKey(Teachers, on_delete=models.CASCADE)
+    # attendance_id = models.ForeignKey(AttendanceReport, on_delete=models.CASCADE)
+    # attendance_date = models.DateField()
     status = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -124,6 +131,16 @@ class LeaveReportStudent(models.Model):
 class LeaveReportTeacher(models.Model):
     id = models.AutoField(primary_key=True)
     teacher_id = models.ForeignKey(Teachers, on_delete=models.CASCADE)
+    leave_date = models.CharField(max_length=255)
+    leave_message = models.TextField()
+    leave_status = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+
+class LeaveReportStudent(models.Model):
+    id = models.AutoField(primary_key=True)
+    student_id = models.ForeignKey(Students, on_delete=models.CASCADE)
     leave_date = models.CharField(max_length=255)
     leave_message = models.TextField()
     leave_status = models.IntegerField(default=0)
@@ -197,9 +214,6 @@ class Calendar(models.Model):
     created_date = models.DateField(auto_now=False , editable=True)  
     objects=models.Manager()
     
-
-
-
 
 #Creating Django Signals
 
