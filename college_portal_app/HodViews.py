@@ -304,4 +304,3 @@ def new_event(request):
         )
         return HttpResponseRedirect(reverse('show_calendar'))
     return render(request, 'hod_template/event.html', {'form': form})
-
