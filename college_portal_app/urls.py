@@ -1,7 +1,7 @@
 
 from django.urls import path, include
 from . import views
-from . import HodViews
+from . import HodViews,staffViews,studentViews
 
 
 urlpatterns = [
@@ -13,7 +13,9 @@ urlpatterns = [
     path('add_semister/', HodViews.add_semister, name="add_semister"),
     path('add_semister_save/', HodViews.add_semister_save, name="add_semister_save"),
     path('add_student/', HodViews.add_student, name="add_student"),
+    path('staff_add_student/', staffViews.staff_add_student, name="staff_add_student"),
     path('add_student_save/', HodViews.add_student_save, name="add_student_save"),
+    path('add_student_save/', staffViews.add_student_save, name="add_student_save"),
     path('attendance_student/', HodViews.attendance_student, name="attendance_student"),
     path('attendance_faculty/', HodViews.attendance_faculty, name="attendance_faculty"),
     path('change_password/',views.change_password, name='change_password'),
@@ -33,10 +35,15 @@ urlpatterns = [
     path('manage_semister/', HodViews.manage_semister, name="manage_semister"),
     path('manage_teacher/', HodViews.manage_teacher, name="manage_teacher"),
     path('manage_student/', HodViews.manage_student, name="manage_student"),
+    path('manage_student/', staffViews.manage_student, name="manage_student"),
     path('send_otp/' , views.sending_email , name="sending_email"),
     path('successful/', views.verify_otp , name="verify_otp"),
     path('show_calendar/' , HodViews.show_calendar , name='show_calendar'),
     path('staff_home/', HodViews.staff_home, name="staff_home"),
+    path('staff_apply_lv_rq/', staffViews.staff_apply_lv_rq, name="staff_leave_req"),
+    path('staff_stud_lv_rq/', staffViews.staff_stud_lv_rq, name="staff_stud_leave_req"),
+    path('staff_attendance/', staffViews.staff_attendance, name="staff_attendance"),
+    path('chk_stud_attendance/', staffViews.chk_stud_attendance, name="check_stud_attendance"),
     path('student_home/', HodViews.student_home, name="student_home"),
     # path('edit_student/<student_id>', HodViews.edit_student, name="edit_student"),
     # path('edit_student_save/', HodViews.edit_student_save, name="edit_student_save"),
